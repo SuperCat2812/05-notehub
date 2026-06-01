@@ -21,8 +21,8 @@ function App() {
     setOnModal(false);
   };
   const { data } = useQuery({
-    queryKey: ["note"],
-    queryFn: FetchNote,
+    queryKey: ["note", page],
+    queryFn: () => FetchNote(page),
     enabled: true,
     placeholderData: keepPreviousData,
   });
