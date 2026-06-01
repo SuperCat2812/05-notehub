@@ -8,9 +8,7 @@ import NoteForm from "../NoteForm/NoteForm";
 import { FetchNote } from "../../services/noteService";
 import NoteList from "../NoteList/NoteList";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-// {
-//   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhc2hrYTI4MTIwNS5ibGVuZGVyQGdtYWlsLmNvbSIsImlhdCI6MTc4MDI1NjAwM30.5eXHi7pGGsyK1GpjsKJvuqXX8HO8An427Qf_3fm6TyQ"
-// }
+
 function App() {
   const [onModal, setOnModal] = useState(false);
   const [page, setPage] = useState(1);
