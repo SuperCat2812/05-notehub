@@ -14,11 +14,11 @@ export interface Note {
 type TagValue = "Todo" | "Work" | "Shopping" | "Meeting" | "Personal";
 
 export interface NoteParams {
-  search: string;
-  tag: TagValue;
+  search?: string;
+  tag?: TagValue;
   page: number;
-  perPage: number;
-  softBy: "created" | "updated";
+  perPage?: number;
+  softBy?: "created" | "updated";
 }
 export interface NoteValue {
   title: string;

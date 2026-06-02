@@ -1,31 +1,21 @@
 import { useState } from "react";
-
 import css from "./App.module.css";
 import SearchBox from "../SearchBox/SearchBox";
 import Pagination from "../Pagination/Pagination";
 import Modal from "../Modal/Modal";
 import NoteForm from "../NoteForm/NoteForm";
-import { FetchNote } from "../../services/noteService";
 import NoteList from "../NoteList/NoteList";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+
+import { useModalClose } from "../../hooks/useModal";
+import { useLoudContent } from "../../hooks/useLoudContent";
+import { useDebounce } from "use-debounce";
 
 function App() {
-  const [onModal, setOnModal] = useState(false);
+  const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
-  const openModal = () => {
-    setOnModal(true);
-  };
-  const closeModal = () => {
-    setOnModal(false);
-  };
-  const { data } = useQuery({
-    queryKey: ["note", page],
-    queryFn: () => FetchNote(page),
-    enabled: true,
-    placeholderData: keepPreviousData,
-  });
-  const notes = data?.notes || [];
-  const totalPage = data?.totalPages || 1;
+  const [value] = useDebounce(query, 300);
+  const [onModal, openModal, closeModal] = useModalClose();
+  const [notes, totalPage] = useLoudContent({ page, value });
   const handleChangePage = (page: number) => {
     setPage(page);
   };
@@ -33,7 +23,10 @@ function App() {
     <>
       <div className={css.app}>
         <header className={css.toolbar}>
-          <SearchBox />
+          <SearchBox
+            query={query}
+            setQuery={setQuery}
+          />
 
           <button
             type="button"
