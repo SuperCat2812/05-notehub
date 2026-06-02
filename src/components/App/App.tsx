@@ -8,14 +8,18 @@ import NoteList from "../NoteList/NoteList";
 
 import { useModalClose } from "../../hooks/useModal";
 import { useLoudContent } from "../../hooks/useLoudContent";
-import { useDebounce } from "use-debounce";
 
 function App() {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
-  const [value] = useDebounce(query, 300);
+
   const [onModal, openModal, closeModal] = useModalClose();
-  const [notes, totalPage] = useLoudContent({ page, value });
+  const [notes, totalPage, updateQuery] = useLoudContent({
+    page,
+    query,
+    setQuery,
+    setPage,
+  });
   const handleChangePage = (page: number) => {
     setPage(page);
   };
@@ -25,7 +29,7 @@ function App() {
         <header className={css.toolbar}>
           <SearchBox
             query={query}
-            setQuery={setQuery}
+            updateQuery={updateQuery}
           />
 
           <button

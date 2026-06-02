@@ -2,16 +2,16 @@ import css from "./SearchBox.module.css";
 
 interface SearchBoxParams {
   query: string;
-  setQuery: (query: string) => void;
+  updateQuery: (query: string) => void;
 }
-export default function SearchBox({ query, setQuery }: SearchBoxParams) {
+export default function SearchBox({ query, updateQuery }: SearchBoxParams) {
   return (
     <input
       className={css.input}
       type="text"
       placeholder="Search notes"
-      value={query}
-      onChange={(e) => setQuery(e.target.value)}
+      defaultValue={query}
+      onChange={(e) => updateQuery(e.target.value)}
     />
   );
 }
