@@ -20,9 +20,15 @@ export default function NoteForm({ closeModal }: NoteFormProps) {
     tag: "Todo",
   };
   const NoteFormValues = Yup.object().shape({
-    title: Yup.string().min(2).required(),
-    content: Yup.string().max(500).required(),
-    tag: Yup.string().required(),
+    title: Yup.string().min(3).max(50).required(),
+    content: Yup.string().max(500),
+    tag: Yup.string().oneOf([
+      "Todo",
+      "Work",
+      "Personal",
+      "Meeting",
+      "Shopping",
+    ]),
   });
   const queryClient = useQueryClient();
   const { mutate } = useMutation({

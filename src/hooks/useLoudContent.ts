@@ -1,6 +1,6 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { FetchNote } from "../services/noteService";
-import type { Note, NoteParams } from "../types/note";
+import { FetchNote, type NoteParams } from "../services/noteService";
+import type { Note } from "../types/note";
 import { useDebouncedCallback } from "use-debounce";
 
 type useLoudContentType = [Note[], number, (query: string) => void];

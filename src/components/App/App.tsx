@@ -51,7 +51,7 @@ function App() {
             <NoteForm closeModal={closeModal} />
           </Modal>
         )}
-        <NoteList notes={notes} />
+        {notes.length > 0 && <NoteList notes={notes} />}
       </div>
     </>
   );

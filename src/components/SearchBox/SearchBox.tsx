@@ -1,10 +1,10 @@
 import css from "./SearchBox.module.css";
 
-interface SearchBoxParams {
+interface SearchBoxProps {
   query: string;
   updateQuery: (query: string) => void;
 }
-export default function SearchBox({ query, updateQuery }: SearchBoxParams) {
+export default function SearchBox({ query, updateQuery }: SearchBoxProps) {
   return (
     <input
       className={css.input}
