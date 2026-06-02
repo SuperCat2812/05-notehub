@@ -1,5 +1,5 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { FetchNote, type NoteParams } from "../services/noteService";
+import { fetchNotes, type NoteParams } from "../services/noteService";
 import type { Note } from "../types/note";
 import { useDebouncedCallback } from "use-debounce";
 
@@ -22,7 +22,7 @@ export const useLoudContent = ({
   }, 300);
   const { data } = useQuery({
     queryKey: ["note", { page, query }],
-    queryFn: () => FetchNote({ page, search: query }),
+    queryFn: () => fetchNotes({ page, search: query }),
     enabled: true,
     placeholderData: keepPreviousData,
   });

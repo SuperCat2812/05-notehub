@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import css from "./NoteForm.module.css";
 import type { Note } from "../../types/note";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AddNote } from "../../services/noteService";
+import { addNote } from "../../services/noteService";
 interface NoteFormProps {
   closeModal: () => void;
 }
@@ -32,7 +32,7 @@ export default function NoteForm({ closeModal }: NoteFormProps) {
   });
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
-    mutationFn: AddNote,
+    mutationFn: addNote,
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["note"] });
       closeModal();
