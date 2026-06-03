@@ -1,12 +1,24 @@
 import type { Note } from "../../types/note";
 import css from "./NoteList.module.css";
-import { UseNote } from "../../hooks/useNotes";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteNote } from "../../services/noteService";
 
 interface NoteListProps {
   notes: Note[];
 }
 export default function NoteList({ notes }: NoteListProps) {
-  const [handlerDelete] = UseNote();
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: deleteNote,
+    onSuccess() {
+      queryClient.invalidateQueries({
+        queryKey: ["note"],
+      });
+    },
+  });
+  const handlerDelete = (id: Note["id"]) => {
+    mutate(id);
+  };
   return (
     <ul className={css.list}>
       {notes.map((note) => {
